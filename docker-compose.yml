@@ -1,0 +1,20 @@
+version: '3'
+services:
+  mssql-server:
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "yourStrong(!)Password"
+      MSSQL_PID: Express
+    ports:
+      - "1433:1433"
+  webapi:
+    build: .
+    environment:
+      DbServer: "mssql-server"
+      DbPort: "1433"
+      DbUser: "SA"
+      Password: "yourStrong(!)Password"
+      Database: "vehiclesdb"
+    ports: 
+      - "8090:80"
