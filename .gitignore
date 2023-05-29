@@ -454,3 +454,7 @@ $RECYCLE.BIN/
 !.vscode/extensions.json
 
 appsettings.json
+
+data
+secrets
+mssql

@@ -1,15 +1,23 @@
 version: '3'
 services:
-  mssql-server:
+  db:
     image: mcr.microsoft.com/mssql/server:2022-latest
+    user: root
     environment:
       ACCEPT_EULA: "Y"
       MSSQL_SA_PASSWORD: "yourStrong(!)Password"
       MSSQL_PID: Express
     ports:
       - "1433:1433"
+    volumes:
+      - "./mssql/data/:/var/opt/mssql/data/"
+      - "./mssql/log/:/var/opt/mssql/log/"
+      - "./mssql/secrets/:/var/opt/mssql/secrets/"
+
   webapi:
     build: .
+    depends_on:
+      - db
     environment:
       DbPort: "1433"
       DbUser: "SA"

@@ -9,18 +9,18 @@ namespace vehicle_retailer.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]
-  public class FeatureController : ControllerBase
+  public class FeaturesController : ControllerBase
   {
     private readonly ApiDbContext _context;
     private readonly IMapper _mapper;
 
-    public FeatureController(ApiDbContext context, IMapper mapper)
+    public FeaturesController(ApiDbContext context, IMapper mapper)
     {
       _context = context;
       _mapper = mapper;
     }
 
-    [HttpGet("/features")]
+    [HttpGet]
     public async Task<IEnumerable<FeatureResource>> GetFeatures()
     {
       var features = await _context.Features.ToListAsync();
