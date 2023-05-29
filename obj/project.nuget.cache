@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "QcAsdhHpCo2AEar5M2FXfXTa9nhsqpJjzBfHTJuN9HwTr4kWfvhudnKjAg0Y3X7CkahDygGvBzhws3VtcnuFEw==",
+  "dgSpecHash": "MPVp82Dbr5PJu9NyXil7k4GjaXv4Rly43C96DV1rNGrrUQpSjldr45X3Drjo7QB9+9StQTV82TIAEj6YpL917g==",
   "success": true,
   "projectFilePath": "/home/riann/dev/vehicle-retailer/vehicle-retailer.csproj",
   "expectedPackageFiles": [
@@ -10,7 +10,7 @@
     "/home/riann/.nuget/packages/swashbuckle.aspnetcore.swagger/6.2.3/swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
     "/home/riann/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.2.3/swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
     "/home/riann/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.2.3/swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
-    "/home/riann/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.14/microsoft.aspnetcore.app.ref.6.0.14.nupkg.sha512"
+    "/home/riann/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.16/microsoft.aspnetcore.app.ref.6.0.16.nupkg.sha512"
   ],
   "logs": []
 }
