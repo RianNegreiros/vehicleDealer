@@ -11,8 +11,8 @@ using vehicle_retailer.Persistence;
 namespace vehicle_retailer.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20230529175152_InitialModel")]
-    partial class InitialModel
+    [Migration("20230529181015_ApplyConstraints")]
+    partial class ApplyConstraints
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,7 +34,8 @@ namespace vehicle_retailer.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
@@ -54,13 +55,14 @@ namespace vehicle_retailer.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("MakeId");
 
-                    b.ToTable("Model");
+                    b.ToTable("Models");
                 });
 
             modelBuilder.Entity("vehicle_retailer.Models.Model", b =>
