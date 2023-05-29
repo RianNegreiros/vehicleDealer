@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using vehicle_retailer.Models;
 
 namespace vehicle_retailer.Persistence
 {
@@ -7,7 +8,8 @@ namespace vehicle_retailer.Persistence
     public ApiDbContext(DbContextOptions<ApiDbContext> options)
         : base(options)
     {
-
     }
+
+    public DbSet<Make> Makes { get; set; }
   }
 }
