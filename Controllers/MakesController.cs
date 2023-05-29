@@ -19,7 +19,7 @@ namespace vehicle_retailer.Controllers
       _context = context;
     }
 
-    [HttpGet("/makes")]
+    [HttpGet]
     public async Task<IEnumerable<MakeResource>> GetMakes()
     {
       var makes = await _context.Makes.Include(m => m.Models).ToListAsync();
