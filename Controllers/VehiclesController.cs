@@ -88,5 +88,13 @@ namespace vehicle_retailer.Controllers
 
       return Ok(vehicleResource);
     }
+
+    [HttpGet]
+    public async Task<IEnumerable<VehicleResource>> GetVehicles()
+    {
+      var vehicles = await _repository.GetVehicles();
+
+      return _mapper.Map<IEnumerable<Vehicle>, IEnumerable<VehicleResource>>(vehicles);
+    }
   }
 }
