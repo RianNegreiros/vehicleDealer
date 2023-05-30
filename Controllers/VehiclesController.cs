@@ -13,11 +13,13 @@ namespace vehicle_retailer.Controllers
   {
     private readonly ApiDbContext _context;
     private readonly IMapper _mapper;
+    private readonly IVehicleRepository _repository;
 
-    public VehiclesController(ApiDbContext context, IMapper mapper)
+    public VehiclesController(ApiDbContext context, IMapper mapper, IVehicleRepository repository)
     {
       _context = context;
       _mapper = mapper;
+      _repository = repository;
     }
 
     [HttpPost]
@@ -32,12 +34,7 @@ namespace vehicle_retailer.Controllers
       _context.Vehicles.Add(vehicle);
       await _context.SaveChangesAsync();
 
-      vehicle = await _context.Vehicles
-        .Include(v => v.Features)
-          .ThenInclude(vf => vf.Feature)
-        .Include(v => v.Model)
-          .ThenInclude(m => m.Make)
-        .SingleOrDefaultAsync(v => v.Id == vehicle.Id);
+      vehicle = await _repository.GetVehicle(vehicle.Id);
 
       var result = _mapper.Map<Vehicle, VehicleResource>(vehicle);
 
@@ -50,12 +47,7 @@ namespace vehicle_retailer.Controllers
       if (!ModelState.IsValid)
         return BadRequest(ModelState);
 
-      var vehicle = await _context.Vehicles
-        .Include(v => v.Features)
-          .ThenInclude(vf => vf.Feature)
-        .Include(v => v.Model)
-          .ThenInclude(m => m.Make)
-        .SingleOrDefaultAsync(v => v.Id == id);
+      var vehicle = await _repository.GetVehicle(id);
 
       if (vehicle == null)
         return NotFound();
@@ -87,12 +79,8 @@ namespace vehicle_retailer.Controllers
     [HttpGet("{id}")]
     public async Task<IActionResult> GetVehicle(int id)
     {
-      var vehicle = await _context.Vehicles
-        .Include(v => v.Features)
-          .ThenInclude(vf => vf.Feature)
-        .Include(v => v.Model)
-          .ThenInclude(m => m.Make)
-        .SingleOrDefaultAsync(v => v.Id == id);
+      var vehicle = await _repository.GetVehicle(id);
+
       if (vehicle == null)
         return NotFound();
 
