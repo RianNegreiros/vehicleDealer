@@ -1,6 +1,6 @@
-using vehicle_retailer.Core.Interfaces;
+using vehicleDealer.Core.Interfaces;
 
-namespace vehicle_retailer.Persistence
+namespace vehicleDealer.Persistence
 {
   public class UnitOfWork : IUnitOfWork
   {

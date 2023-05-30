@@ -1,4 +1,4 @@
-namespace vehicle_retailer.Extensions
+namespace vehicleDealer.Extensions
 {
   public interface IQueryObject
   {

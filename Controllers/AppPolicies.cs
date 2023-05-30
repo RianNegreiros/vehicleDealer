@@ -1,4 +1,4 @@
-namespace vehicle_retailer.Controllers
+namespace vehicleDealer.Controllers
 {
   public static class Policies
   {

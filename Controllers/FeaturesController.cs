@@ -1,11 +1,11 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using vehicle_retailer.Controllers.Resources;
-using vehicle_retailer.Core.Models;
-using vehicle_retailer.Persistence;
+using vehicleDealer.Controllers.Resources;
+using vehicleDealer.Core.Models;
+using vehicleDealer.Persistence;
 
-namespace vehicle_retailer.Controllers
+namespace vehicleDealer.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]

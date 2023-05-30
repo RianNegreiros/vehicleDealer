@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using vehicle_retailer.Controllers;
-using vehicle_retailer.Core.Interfaces;
-using vehicle_retailer.Core.Models;
-using vehicle_retailer.Persistence;
+using vehicleDealer.Controllers;
+using vehicleDealer.Core.Interfaces;
+using vehicleDealer.Core.Models;
+using vehicleDealer.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 

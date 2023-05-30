@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using vehicle_retailer.Core.Interfaces;
-using vehicle_retailer.Core.Models;
+using vehicleDealer.Core.Interfaces;
+using vehicleDealer.Core.Models;
 
-namespace vehicle_retailer.Persistence
+namespace vehicleDealer.Persistence
 {
   public class PhotoRepository : IPhotoRepository
   {

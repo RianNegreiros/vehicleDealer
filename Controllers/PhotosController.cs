@@ -1,12 +1,12 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using vehicle_retailer.Controllers.Resources;
-using vehicle_retailer.Core.Interfaces;
-using vehicle_retailer.Core.Models;
+using vehicleDealer.Controllers.Resources;
+using vehicleDealer.Core.Interfaces;
+using vehicleDealer.Core.Models;
 using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
-namespace vehicle_retailer.Controllers
+namespace vehicleDealer.Controllers
 {
   [ApiController]
   [Route("api/vehicles/{vehicleId}/[controller]")]

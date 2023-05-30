@@ -1,4 +1,4 @@
-namespace vehicle_retailer.Controllers.Resources
+namespace vehicleDealer.Controllers.Resources
 {
   public class PhotoResource
   {

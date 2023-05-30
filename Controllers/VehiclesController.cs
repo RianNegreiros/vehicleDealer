@@ -1,11 +1,11 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using vehicle_retailer.Controllers.Resources;
-using vehicle_retailer.Core.Interfaces;
-using vehicle_retailer.Core.Models;
+using vehicleDealer.Controllers.Resources;
+using vehicleDealer.Core.Interfaces;
+using vehicleDealer.Core.Models;
 
-namespace vehicle_retailer.Controllers
+namespace vehicleDealer.Controllers
 {
   [ApiController]
   [Route("api/[controller]")]

@@ -3554,11 +3554,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/riann/dev/vehicle-retailer/vehicle-retailer.csproj",
-      "projectName": "vehicle-retailer",
-      "projectPath": "/home/riann/dev/vehicle-retailer/vehicle-retailer.csproj",
+      "projectUniqueName": "/home/riann/dev/vehicleDealer/vehicleDealer.csproj",
+      "projectName": "vehicleDealer",
+      "projectPath": "/home/riann/dev/vehicleDealer/vehicleDealer.csproj",
       "packagesPath": "/home/riann/.nuget/packages/",
-      "outputPath": "/home/riann/dev/vehicle-retailer/obj/",
+      "outputPath": "/home/riann/dev/vehicleDealer/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/riann/.nuget/NuGet/NuGet.Config"

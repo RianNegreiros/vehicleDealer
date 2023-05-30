@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using vehicle_retailer.Core.Models;
+using vehicleDealer.Core.Models;
 
-namespace vehicle_retailer.Persistence
+namespace vehicleDealer.Persistence
 {
   public class ApiDbContext : DbContext
   {

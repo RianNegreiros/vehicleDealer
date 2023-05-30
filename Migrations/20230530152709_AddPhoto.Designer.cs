@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using vehicle_retailer.Persistence;
+using vehicleDealer.Persistence;
 
 #nullable disable
 
-namespace vehicle_retailer.Migrations
+namespace vehicleDealer.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
     [Migration("20230530152709_AddPhoto")]
@@ -25,7 +25,7 @@ namespace vehicle_retailer.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("vehicle_retailer.Core.Models.Feature", b =>
+            modelBuilder.Entity("vehicleDealer.Core.Models.Feature", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -43,7 +43,7 @@ namespace vehicle_retailer.Migrations
                     b.ToTable("Features");
                 });
 
-            modelBuilder.Entity("vehicle_retailer.Core.Models.Make", b =>
+            modelBuilder.Entity("vehicleDealer.Core.Models.Make", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -61,7 +61,7 @@ namespace vehicle_retailer.Migrations
                     b.ToTable("Makes");
                 });
 
-            modelBuilder.Entity("vehicle_retailer.Core.Models.Model", b =>
+            modelBuilder.Entity("vehicleDealer.Core.Models.Model", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -84,7 +84,7 @@ namespace vehicle_retailer.Migrations
                     b.ToTable("Models");
                 });
 
-            modelBuilder.Entity("vehicle_retailer.Core.Models.Photo", b =>
+            modelBuilder.Entity("vehicleDealer.Core.Models.Photo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -107,7 +107,7 @@ namespace vehicle_retailer.Migrations
                     b.ToTable("Photos");
                 });
 
-            modelBuilder.Entity("vehicle_retailer.Core.Models.Vehicle", b =>
+            modelBuilder.Entity("vehicleDealer.Core.Models.Vehicle", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -146,7 +146,7 @@ namespace vehicle_retailer.Migrations
                     b.ToTable("Vehicles");
                 });
 
-            modelBuilder.Entity("vehicle_retailer.Core.Models.VehicleFeature", b =>
+            modelBuilder.Entity("vehicleDealer.Core.Models.VehicleFeature", b =>
                 {
                     b.Property<int>("VehicleId")
                         .HasColumnType("int");
@@ -161,9 +161,9 @@ namespace vehicle_retailer.Migrations
                     b.ToTable("VehicleFeatures");
                 });
 
-            modelBuilder.Entity("vehicle_retailer.Core.Models.Model", b =>
+            modelBuilder.Entity("vehicleDealer.Core.Models.Model", b =>
                 {
-                    b.HasOne("vehicle_retailer.Core.Models.Make", "Make")
+                    b.HasOne("vehicleDealer.Core.Models.Make", "Make")
                         .WithMany("Models")
                         .HasForeignKey("MakeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -172,16 +172,16 @@ namespace vehicle_retailer.Migrations
                     b.Navigation("Make");
                 });
 
-            modelBuilder.Entity("vehicle_retailer.Core.Models.Photo", b =>
+            modelBuilder.Entity("vehicleDealer.Core.Models.Photo", b =>
                 {
-                    b.HasOne("vehicle_retailer.Core.Models.Vehicle", null)
+                    b.HasOne("vehicleDealer.Core.Models.Vehicle", null)
                         .WithMany("Photos")
                         .HasForeignKey("VehicleId");
                 });
 
-            modelBuilder.Entity("vehicle_retailer.Core.Models.Vehicle", b =>
+            modelBuilder.Entity("vehicleDealer.Core.Models.Vehicle", b =>
                 {
-                    b.HasOne("vehicle_retailer.Core.Models.Model", "Model")
+                    b.HasOne("vehicleDealer.Core.Models.Model", "Model")
                         .WithMany()
                         .HasForeignKey("ModelId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -190,15 +190,15 @@ namespace vehicle_retailer.Migrations
                     b.Navigation("Model");
                 });
 
-            modelBuilder.Entity("vehicle_retailer.Core.Models.VehicleFeature", b =>
+            modelBuilder.Entity("vehicleDealer.Core.Models.VehicleFeature", b =>
                 {
-                    b.HasOne("vehicle_retailer.Core.Models.Feature", "Feature")
+                    b.HasOne("vehicleDealer.Core.Models.Feature", "Feature")
                         .WithMany()
                         .HasForeignKey("FeatureId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("vehicle_retailer.Core.Models.Vehicle", "Vehicle")
+                    b.HasOne("vehicleDealer.Core.Models.Vehicle", "Vehicle")
                         .WithMany("Features")
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -209,12 +209,12 @@ namespace vehicle_retailer.Migrations
                     b.Navigation("Vehicle");
                 });
 
-            modelBuilder.Entity("vehicle_retailer.Core.Models.Make", b =>
+            modelBuilder.Entity("vehicleDealer.Core.Models.Make", b =>
                 {
                     b.Navigation("Models");
                 });
 
-            modelBuilder.Entity("vehicle_retailer.Core.Models.Vehicle", b =>
+            modelBuilder.Entity("vehicleDealer.Core.Models.Vehicle", b =>
                 {
                     b.Navigation("Features");
 

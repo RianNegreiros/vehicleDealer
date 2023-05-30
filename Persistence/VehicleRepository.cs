@@ -1,10 +1,10 @@
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using vehicle_retailer.Core.Interfaces;
-using vehicle_retailer.Core.Models;
-using vehicle_retailer.Extensions;
+using vehicleDealer.Core.Interfaces;
+using vehicleDealer.Core.Models;
+using vehicleDealer.Extensions;
 
-namespace vehicle_retailer.Persistence
+namespace vehicleDealer.Persistence
 {
   public class VehicleRepository : IVehicleRepository
   {

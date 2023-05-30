@@ -9,7 +9,7 @@
     }
   },
   "profiles": {
-    "vehicle_retailer": {
+    "vehicleDealer": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
