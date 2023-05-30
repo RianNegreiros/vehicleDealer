@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using vehicle_retailer.Core.Interfaces;
 using vehicle_retailer.Core.Models;
@@ -6,49 +7,63 @@ namespace vehicle_retailer.Persistence
 {
   public class VehicleRepository : IVehicleRepository
   {
-    private readonly ApiDbContext _context;
+    private readonly ApiDbContext context;
+
     public VehicleRepository(ApiDbContext context)
     {
-      _context = context;
+      this.context = context;
     }
 
     public async Task<Vehicle?> GetVehicle(int id, bool includeRelated = true)
     {
       if (!includeRelated)
-        return await _context.Vehicles.FindAsync(id);
+        return await context.Vehicles.FindAsync(id);
 
-      return await _context.Vehicles
-          .Include(v => v.Features)
-              .ThenInclude(vf => vf.Feature)
-          .Include(v => v.Model)
-              .ThenInclude(m => m.Make)
-          .SingleOrDefaultAsync(v => v.Id == id);
+      return await context.Vehicles
+        .Include(v => v.Features)
+          .ThenInclude(vf => vf.Feature)
+        .Include(v => v.Model)
+          .ThenInclude(m => m.Make)
+        .SingleOrDefaultAsync(v => v.Id == id);
     }
 
     public void Add(Vehicle vehicle)
     {
-      _context.Vehicles.Add(vehicle);
+      context.Vehicles.Add(vehicle);
     }
 
     public void Remove(Vehicle vehicle)
     {
-      _context.Vehicles.Remove(vehicle);
+      context.Remove(vehicle);
     }
 
-    public async Task<IEnumerable<Vehicle>> GetVehicles(Filter filter)
+    public async Task<IEnumerable<Vehicle>> GetVehicles(VehicleQuery queryObj)
     {
-      var query = _context.Vehicles
+      var query = context.Vehicles
         .Include(v => v.Model)
           .ThenInclude(m => m.Make)
         .Include(v => v.Features)
           .ThenInclude(vf => vf.Feature)
-                .AsQueryable();
+        .AsQueryable();
 
-      if (filter.MakeId.HasValue)
-        query = query.Where(v => v.Model.MakeId == filter.MakeId.Value);
+      if (queryObj.MakeId.HasValue)
+        query = query.Where(v => v.Model.MakeId == queryObj.MakeId.Value);
 
-      if (filter.ModelId.HasValue)
-        query = query.Where(v => v.ModelId == filter.ModelId.Value);
+      if (queryObj.ModelId.HasValue)
+        query = query.Where(v => v.ModelId == queryObj.ModelId.Value);
+
+      var columnsMap = new Dictionary<string, Expression<Func<Vehicle, object>>>()
+      {
+        ["make"] = v => v.Model.Make.Name,
+        ["model"] = v => v.Model.Name,
+        ["contactName"] = v => v.ContactName,
+        ["id"] = v => v.Id
+      };
+
+      if (queryObj.IsSortAscending)
+        query = query.OrderBy(columnsMap[queryObj.SortBy]);
+      else
+        query = query.OrderByDescending(columnsMap[queryObj.SortBy]);
 
       return await query.ToListAsync();
     }
