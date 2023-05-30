@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace vehicle_retailer.Models
+namespace vehicle_retailer.Core.Models
 {
   public class Make
   {

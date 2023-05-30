@@ -2,7 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using vehicle_retailer.Controllers.Resources;
-using vehicle_retailer.Models;
+using vehicle_retailer.Core.Models;
 using vehicle_retailer.Persistence;
 
 namespace vehicle_retailer.Controllers
@@ -21,11 +21,11 @@ namespace vehicle_retailer.Controllers
     }
 
     [HttpGet]
-    public async Task<IEnumerable<FeatureResource>> GetFeatures()
+    public async Task<IEnumerable<KeyValuePairResource>> GetFeatures()
     {
       var features = await _context.Features.ToListAsync();
 
-      return _mapper.Map<List<Feature>, List<FeatureResource>>(features);
+      return _mapper.Map<List<Feature>, List<KeyValuePairResource>>(features);
     }
   }
 }
