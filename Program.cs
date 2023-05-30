@@ -20,6 +20,7 @@ builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IPhotoRepository, PhotoRepository>();
 builder.Services.AddTransient<IPhotoService, PhotoService>();
+builder.Services.AddTransient<IPhotoStorage, FileSystemPhotoStorage>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddDbContext<ApiDbContext>(options =>
