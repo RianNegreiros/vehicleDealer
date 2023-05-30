@@ -2,24 +2,25 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using vehicle_retailer.Core.Interfaces;
 using vehicle_retailer.Core.Models;
+using vehicle_retailer.Extensions;
 
 namespace vehicle_retailer.Persistence
 {
   public class VehicleRepository : IVehicleRepository
   {
-    private readonly ApiDbContext context;
+    private readonly ApiDbContext _context;
 
     public VehicleRepository(ApiDbContext context)
     {
-      this.context = context;
+      _context = context;
     }
 
     public async Task<Vehicle?> GetVehicle(int id, bool includeRelated = true)
     {
       if (!includeRelated)
-        return await context.Vehicles.FindAsync(id);
+        return await _context.Vehicles.FindAsync(id);
 
-      return await context.Vehicles
+      return await _context.Vehicles
         .Include(v => v.Features)
           .ThenInclude(vf => vf.Feature)
         .Include(v => v.Model)
@@ -29,17 +30,17 @@ namespace vehicle_retailer.Persistence
 
     public void Add(Vehicle vehicle)
     {
-      context.Vehicles.Add(vehicle);
+      _context.Vehicles.Add(vehicle);
     }
 
     public void Remove(Vehicle vehicle)
     {
-      context.Remove(vehicle);
+      _context.Remove(vehicle);
     }
 
     public async Task<IEnumerable<Vehicle>> GetVehicles(VehicleQuery queryObj)
     {
-      var query = context.Vehicles
+      var query = _context.Vehicles
         .Include(v => v.Model)
           .ThenInclude(m => m.Make)
         .Include(v => v.Features)
@@ -56,14 +57,12 @@ namespace vehicle_retailer.Persistence
       {
         ["make"] = v => v.Model.Make.Name,
         ["model"] = v => v.Model.Name,
-        ["contactName"] = v => v.ContactName,
-        ["id"] = v => v.Id
+        ["contactName"] = v => v.ContactName
       };
 
-      if (queryObj.IsSortAscending)
-        query = query.OrderBy(columnsMap[queryObj.SortBy]);
-      else
-        query = query.OrderByDescending(columnsMap[queryObj.SortBy]);
+      query = query.ApplyOrdering(queryObj, columnsMap);
+
+      query = query.ApplyPaging(queryObj);
 
       return await query.ToListAsync();
     }
