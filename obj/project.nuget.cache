@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "8F8SDI26TvPleXc5y97ZuGGrfrOx47mEGstheYQOdaSnZEUhY1GgR3x87+2E3vlfM3mXc+Mgh8mHn7FAjZTEIA==",
+  "dgSpecHash": "l298QD8uIKK1XwtfIsSezbzWxuSOZssjzcLkxRnTf9skSnme7iRWTA65pnrXEoKhlXYmmUsR+VtfiX+PmfWuOQ==",
   "success": true,
   "projectFilePath": "/home/riann/dev/vehicle-retailer/vehicle-retailer.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "/home/riann/.nuget/packages/azure.core/1.24.0/azure.core.1.24.0.nupkg.sha512",
     "/home/riann/.nuget/packages/azure.identity/1.6.0/azure.identity.1.6.0.nupkg.sha512",
     "/home/riann/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
+    "/home/riann/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/6.0.16/microsoft.aspnetcore.authentication.jwtbearer.6.0.16.nupkg.sha512",
     "/home/riann/.nuget/packages/microsoft.bcl.asyncinterfaces/1.1.1/microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "/home/riann/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
     "/home/riann/.nuget/packages/microsoft.data.sqlclient/5.0.1/microsoft.data.sqlclient.5.0.1.nupkg.sha512",
