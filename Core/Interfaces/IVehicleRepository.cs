@@ -7,6 +7,6 @@ namespace vehicle_retailer.Core.Interfaces
     Task<Vehicle?> GetVehicle(int id, bool includeRelated = true);
     public void Add(Vehicle vehicle);
     public void Remove(Vehicle vehicle);
-    public Task<IEnumerable<Vehicle>> GetVehicles(VehicleQuery queryObj);
+    public Task<QueryResult<Vehicle>> GetVehicles(VehicleQuery queryObj);
   }
 }
