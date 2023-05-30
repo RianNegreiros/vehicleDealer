@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace vehicle_retailer.Controllers.Resources
+namespace vehicleDealer.Controllers.Resources
 {
   public class SaveVehicleResource
   {

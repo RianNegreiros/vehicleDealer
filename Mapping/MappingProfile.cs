@@ -1,8 +1,8 @@
 using AutoMapper;
-using vehicle_retailer.Controllers.Resources;
-using vehicle_retailer.Core.Models;
+using vehicleDealer.Controllers.Resources;
+using vehicleDealer.Core.Models;
 
-namespace vehicle_retailer.Mapping
+namespace vehicleDealer.Mapping
 {
   public class MappingProfile : Profile
   {

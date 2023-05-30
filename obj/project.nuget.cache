@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "l298QD8uIKK1XwtfIsSezbzWxuSOZssjzcLkxRnTf9skSnme7iRWTA65pnrXEoKhlXYmmUsR+VtfiX+PmfWuOQ==",
+  "dgSpecHash": "uElhK+2rtSRSq0O+OYfAXL7NJw/KIA2sLu0yYAHgiOP9Hv/hsFaTMtaqS6uqH4l/wBMWFgQb/rKHUaO22d5b3g==",
   "success": true,
-  "projectFilePath": "/home/riann/dev/vehicle-retailer/vehicle-retailer.csproj",
+  "projectFilePath": "/home/riann/dev/vehicle-retailer/vehicleDealer.csproj",
   "expectedPackageFiles": [
     "/home/riann/.nuget/packages/automapper/12.0.1/automapper.12.0.1.nupkg.sha512",
     "/home/riann/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.1/automapper.extensions.microsoft.dependencyinjection.12.0.1.nupkg.sha512",

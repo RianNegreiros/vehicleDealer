@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace vehicle_retailer.Core.Models
+namespace vehicleDealer.Core.Models
 {
   public class Photo
   {

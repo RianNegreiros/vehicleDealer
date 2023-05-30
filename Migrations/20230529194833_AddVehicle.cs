@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace vehicle_retailer.Migrations
+namespace vehicleDealer.Migrations
 {
     /// <inheritdoc />
     public partial class AddVehicle : Migration

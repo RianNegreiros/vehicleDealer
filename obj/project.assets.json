@@ -3554,9 +3554,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/riann/dev/vehicle-retailer/vehicle-retailer.csproj",
-      "projectName": "vehicle-retailer",
-      "projectPath": "/home/riann/dev/vehicle-retailer/vehicle-retailer.csproj",
+      "projectUniqueName": "/home/riann/dev/vehicle-retailer/vehicleDealer.csproj",
+      "projectName": "vehicleDealer",
+      "projectPath": "/home/riann/dev/vehicle-retailer/vehicleDealer.csproj",
       "packagesPath": "/home/riann/.nuget/packages/",
       "outputPath": "/home/riann/dev/vehicle-retailer/obj/",
       "projectStyle": "PackageReference",

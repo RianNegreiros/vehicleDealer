@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace vehicle_retailer.Migrations
+namespace vehicleDealer.Migrations
 {
     /// <inheritdoc />
     public partial class AddPhoto : Migration

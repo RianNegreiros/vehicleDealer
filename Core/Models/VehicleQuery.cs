@@ -1,6 +1,6 @@
-using vehicle_retailer.Extensions;
+using vehicleDealer.Extensions;
 
-namespace vehicle_retailer.Core.Models
+namespace vehicleDealer.Core.Models
 {
   public class VehicleQuery : IQueryObject
   {

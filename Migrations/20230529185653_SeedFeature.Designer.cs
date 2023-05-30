@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using vehicle_retailer.Persistence;
+using vehicleDealer.Persistence;
 
 #nullable disable
 
-namespace vehicle_retailer.Migrations
+namespace vehicleDealer.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
     [Migration("20230529185653_SeedFeature")]
@@ -24,7 +24,7 @@ namespace vehicle_retailer.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("vehicle_retailer.Models.Feature", b =>
+            modelBuilder.Entity("vehicleDealer.Models.Feature", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -42,7 +42,7 @@ namespace vehicle_retailer.Migrations
                     b.ToTable("Features");
                 });
 
-            modelBuilder.Entity("vehicle_retailer.Models.Make", b =>
+            modelBuilder.Entity("vehicleDealer.Models.Make", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -60,7 +60,7 @@ namespace vehicle_retailer.Migrations
                     b.ToTable("Makes");
                 });
 
-            modelBuilder.Entity("vehicle_retailer.Models.Model", b =>
+            modelBuilder.Entity("vehicleDealer.Models.Model", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -83,9 +83,9 @@ namespace vehicle_retailer.Migrations
                     b.ToTable("Models");
                 });
 
-            modelBuilder.Entity("vehicle_retailer.Models.Model", b =>
+            modelBuilder.Entity("vehicleDealer.Models.Model", b =>
                 {
-                    b.HasOne("vehicle_retailer.Models.Make", "Make")
+                    b.HasOne("vehicleDealer.Models.Make", "Make")
                         .WithMany("Models")
                         .HasForeignKey("MakeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -94,7 +94,7 @@ namespace vehicle_retailer.Migrations
                     b.Navigation("Make");
                 });
 
-            modelBuilder.Entity("vehicle_retailer.Models.Make", b =>
+            modelBuilder.Entity("vehicleDealer.Models.Make", b =>
                 {
                     b.Navigation("Models");
                 });

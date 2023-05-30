@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace vehicle_retailer.Controllers.Resources
+namespace vehicleDealer.Controllers.Resources
 {
   public class MakeResource : KeyValuePairResource
   {
