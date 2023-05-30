@@ -1,4 +1,5 @@
-# Vehicle Retailer
+# Vehicle Dealer
+A sample vehicle dealer app built with ASP.NET Core and Entity Framework Core
 
 ## Use Cases
 
