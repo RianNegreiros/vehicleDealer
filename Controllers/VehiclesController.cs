@@ -21,16 +21,23 @@ namespace vehicle_retailer.Controllers
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateVehicle([FromBody] VehicleResource vehicleResource)
+    public async Task<IActionResult> CreateVehicle([FromBody] SaveVehicleResource vehicleResource)
     {
       if (!ModelState.IsValid)
         return BadRequest(ModelState);
 
-      var vehicle = _mapper.Map<VehicleResource, Vehicle>(vehicleResource);
+      var vehicle = _mapper.Map<SaveVehicleResource, Vehicle>(vehicleResource);
       vehicle.LastUpdate = DateTime.Now;
 
       _context.Vehicles.Add(vehicle);
       await _context.SaveChangesAsync();
+
+      vehicle = await _context.Vehicles
+        .Include(v => v.Features)
+          .ThenInclude(vf => vf.Feature)
+        .Include(v => v.Model)
+          .ThenInclude(m => m.Make)
+        .SingleOrDefaultAsync(v => v.Id == vehicle.Id);
 
       var result = _mapper.Map<Vehicle, VehicleResource>(vehicle);
 
@@ -38,17 +45,22 @@ namespace vehicle_retailer.Controllers
     }
 
     [HttpPut("{id}")]
-    public async Task<IActionResult> UpdateVehicle(int id, [FromBody] VehicleResource vehicleResource)
+    public async Task<IActionResult> UpdateVehicle(int id, [FromBody] SaveVehicleResource vehicleResource)
     {
       if (!ModelState.IsValid)
         return BadRequest(ModelState);
 
-      var vehicle = await _context.Vehicles.Include(v => v.Features).SingleOrDefaultAsync(v => v.Id == id);
+      var vehicle = await _context.Vehicles
+        .Include(v => v.Features)
+          .ThenInclude(vf => vf.Feature)
+        .Include(v => v.Model)
+          .ThenInclude(m => m.Make)
+        .SingleOrDefaultAsync(v => v.Id == id);
 
       if (vehicle == null)
         return NotFound();
 
-      _mapper.Map<VehicleResource, Vehicle>(vehicleResource, vehicle);
+      _mapper.Map<SaveVehicleResource, Vehicle>(vehicleResource, vehicle);
       vehicle.LastUpdate = DateTime.Now;
 
       await _context.SaveChangesAsync();
