@@ -13,22 +13,34 @@ namespace vehicleDealer.Controllers
   public class PhotosController : ControllerBase
   {
     private readonly IHostingEnvironment _host;
-    private readonly IVehicleRepository _repository;
-    private readonly IUnitOfWork _unitOfWork;
+    private readonly IVehicleRepository _vehicleRepository;
+    private readonly IPhotoRepository _photoRepository;
     private readonly IMapper _mapper;
     private readonly PhotoSettings _photoSettings;
-    public PhotosController(IHostingEnvironment host, IVehicleRepository repository, IUnitOfWork unitOfWork, IMapper mapper, IOptionsSnapshot<PhotoSettings> options)
+    private readonly IPhotoService _photoService;
+
+    public PhotosController(IHostingEnvironment host, IVehicleRepository vehicleRepository, IPhotoRepository photoRepository, IMapper mapper, IOptionsSnapshot<PhotoSettings> options, IPhotoService photoService)
     {
-      _host = host;
-      _repository = repository;
-      _unitOfWork = unitOfWork;
-      _mapper = mapper;
+      _photoService = photoService;
       _photoSettings = options.Value;
+      _mapper = mapper;
+      _vehicleRepository = vehicleRepository;
+      _photoRepository = photoRepository;
+      _host = host;
     }
+
+    [HttpGet]
+    public async Task<IEnumerable<PhotoResource>> GetPhotos(int vehicleId)
+    {
+      var photos = await _photoRepository.GetPhotos(vehicleId);
+
+      return _mapper.Map<IEnumerable<Photo>, IEnumerable<PhotoResource>>(photos);
+    }
+
     [HttpPost]
     public async Task<IActionResult> Upload(int vehicleId, IFormFile file)
     {
-      var vehicle = await _repository.GetVehicle(vehicleId, includeRelated: false);
+      var vehicle = await _vehicleRepository.GetVehicle(vehicleId, includeRelated: false);
       if (vehicle == null)
         return NotFound();
 
@@ -38,20 +50,7 @@ namespace vehicleDealer.Controllers
       if (!_photoSettings.IsSupported(file.FileName)) return BadRequest("Invalid file type.");
 
       var uploadsFolderPath = Path.Combine(_host.WebRootPath, "uploads");
-      if (!Directory.Exists(uploadsFolderPath))
-        Directory.CreateDirectory(uploadsFolderPath);
-
-      var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-      var filePath = Path.Combine(uploadsFolderPath, fileName);
-
-      using (var stream = new FileStream(filePath, FileMode.Create))
-      {
-        await file.CopyToAsync(stream);
-      }
-
-      var photo = new Photo { FileName = fileName };
-      vehicle.Photos.Add(photo);
-      await _unitOfWork.CompleteAsync();
+      var photo = await _photoService.UploadPhoto(vehicle, file, uploadsFolderPath);
 
       return Ok(_mapper.Map<Photo, PhotoResource>(photo));
     }

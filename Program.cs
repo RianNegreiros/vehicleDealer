@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using vehicleDealer.Controllers;
+using vehicleDealer.Core;
 using vehicleDealer.Core.Interfaces;
 using vehicleDealer.Core.Models;
 using vehicleDealer.Persistence;
@@ -18,6 +19,7 @@ builder.Services.Configure<PhotoSettings>(builder.Configuration.GetSection("Phot
 builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IPhotoRepository, PhotoRepository>();
+builder.Services.AddTransient<IPhotoService, PhotoService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddDbContext<ApiDbContext>(options =>
