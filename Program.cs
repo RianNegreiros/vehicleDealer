@@ -15,6 +15,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.Configure<PhotoSettings>(builder.Configuration.GetSection("PhotoSettings"));
 builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IPhotoRepository, PhotoRepository>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddDbContext<ApiDbContext>(options =>
