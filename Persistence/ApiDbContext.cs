@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using vehicle_retailer.Models;
+using vehicle_retailer.Core.Models;
 
 namespace vehicle_retailer.Persistence
 {

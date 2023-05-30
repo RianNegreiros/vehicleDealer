@@ -1,8 +1,8 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using vehicle_retailer.Controllers.Resources;
-using vehicle_retailer.Models;
-using vehicle_retailer.Persistence;
+using vehicle_retailer.Core.Interfaces;
+using vehicle_retailer.Core.Models;
 
 namespace vehicle_retailer.Controllers
 {

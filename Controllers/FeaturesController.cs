@@ -2,7 +2,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using vehicle_retailer.Controllers.Resources;
-using vehicle_retailer.Models;
+using vehicle_retailer.Core.Models;
 using vehicle_retailer.Persistence;
 
 namespace vehicle_retailer.Controllers

@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using vehicle_retailer.Core.Interfaces;
 using vehicle_retailer.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
