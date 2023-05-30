@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using vehicle_retailer.Controllers;
 using vehicle_retailer.Core.Interfaces;
 using vehicle_retailer.Core.Models;
 using vehicle_retailer.Persistence;
@@ -31,6 +32,11 @@ builder.Services.AddAuthentication(options =>
           options.Authority = "https://dev-lo6hbbeg443ymrdp.us.auth0.com/";
           options.Audience = "https://api.vehicle-dealer.com";
         });
+
+builder.Services.AddAuthorization(options =>
+{
+  options.AddPolicy(Policies.RequireAdminRole, policy => policy.RequireClaim("https://api.vehicle-dealer.com/roles", "Admin"));
+});
 
 var app = builder.Build();
 
