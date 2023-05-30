@@ -1,5 +1,6 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using vehicle_retailer.Controllers.Resources;
 using vehicle_retailer.Core.Interfaces;
 using vehicle_retailer.Core.Models;
@@ -15,12 +16,14 @@ namespace vehicle_retailer.Controllers
     private readonly IVehicleRepository _repository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
-    public PhotosController(IHostingEnvironment host, IVehicleRepository repository, IUnitOfWork unitOfWork, IMapper mapper)
+    private readonly PhotoSettings _photoSettings;
+    public PhotosController(IHostingEnvironment host, IVehicleRepository repository, IUnitOfWork unitOfWork, IMapper mapper, IOptionsSnapshot<PhotoSettings> options)
     {
       _host = host;
       _repository = repository;
       _unitOfWork = unitOfWork;
       _mapper = mapper;
+      _photoSettings = options.Value;
     }
     [HttpPost]
     public async Task<IActionResult> Upload(int vehicleId, IFormFile file)
@@ -28,6 +31,11 @@ namespace vehicle_retailer.Controllers
       var vehicle = await _repository.GetVehicle(vehicleId, includeRelated: false);
       if (vehicle == null)
         return NotFound();
+
+      if (file == null) return BadRequest("Null file");
+      if (file.Length == 0) return BadRequest("Empty file");
+      if (file.Length > _photoSettings.MaxBytes) return BadRequest("Max file size exceeded");
+      if (!_photoSettings.IsSupported(file.FileName)) return BadRequest("Invalid file type.");
 
       var uploadsFolderPath = Path.Combine(_host.WebRootPath, "uploads");
       if (!Directory.Exists(uploadsFolderPath))
