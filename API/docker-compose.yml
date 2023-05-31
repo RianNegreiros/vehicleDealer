@@ -15,7 +15,9 @@ services:
       - "./mssql/secrets/:/var/opt/mssql/secrets/"
 
   webapi:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     depends_on:
       - db
     environment:
@@ -24,4 +26,4 @@ services:
       Password: "yourStrong(!)Password"
       Database: "master"
     ports: 
-      - "8090:80"
+      - "5000:80"
