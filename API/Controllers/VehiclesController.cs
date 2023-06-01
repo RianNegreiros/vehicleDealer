@@ -22,8 +22,15 @@ namespace vehicleDealer.Controllers
       _unitOfWork = unitOfWork;
     }
 
+    /// <summary>
+    /// Create a new vehicle
+    /// </summary>
+    /// <param name="vehicleResource">Vehicle data to be created</param>
+    /// <returns>A specific vehicle</returns>
+    /// <response code="200">Returns a specific vehicle</response>
     [HttpPost]
     [Authorize]
+    [ProducesResponseType(typeof(VehicleResource), 200)]
     public async Task<IActionResult> CreateVehicle([FromBody] SaveVehicleResource vehicleResource)
     {
       if (!ModelState.IsValid)
@@ -42,8 +49,17 @@ namespace vehicleDealer.Controllers
       return Ok(result);
     }
 
+    /// <summary>
+    /// Update a specific vehicle
+    /// </summary>
+    /// <param name="id">Vehicle Identifier</param>
+    /// <param name="vehicleResource">Vehicle data to be updated</param>
+    /// <returns>A specific vehicle</returns>
+    /// <response code="200">Returns a specific vehicle</response>
+    /// <response code="404">If the vehicle is not found</response>
     [HttpPut("{id}")]
     [Authorize]
+    [ProducesResponseType(typeof(VehicleResource), 200)]
     public async Task<IActionResult> UpdateVehicle(int id, [FromBody] SaveVehicleResource vehicleResource)
     {
       if (!ModelState.IsValid)
@@ -65,8 +81,16 @@ namespace vehicleDealer.Controllers
       return Ok(result);
     }
 
+    /// <summary>
+    /// Delete a specific vehicle
+    /// </summary>
+    /// <param name="id">Vehicle Identifier</param>
+    /// <returns>A specific vehicle</returns>
+    /// <response code="200">Returns a specific vehicle</response>
+    /// <response code="404">If the vehicle is not found</response>
     [HttpDelete("{id}")]
     [Authorize]
+    [ProducesResponseType(typeof(int), 200)]
     public async Task<IActionResult> DeleteVehicle(int id)
     {
       var vehicle = await _repository.GetVehicle(id, includeRelated: false);
@@ -80,7 +104,15 @@ namespace vehicleDealer.Controllers
       return Ok(id);
     }
 
+    /// <summary>
+    /// Get a specific vehicle
+    /// </summary>
+    /// <param name="id">Vehicle Identifier</param>
+    /// <returns>A specific vehicle</returns>
+    /// <response code="200">Returns a specific vehicle</response>
+    /// <response code="404">If the vehicle is not found</response>
     [HttpGet("{id}")]
+    [ProducesResponseType(typeof(VehicleResource), 200)]
     public async Task<IActionResult> GetVehicle(int id)
     {
       var vehicle = await _repository.GetVehicle(id);
@@ -93,7 +125,14 @@ namespace vehicleDealer.Controllers
       return Ok(vehicleResource);
     }
 
+    /// <summary>
+    /// Get all vehicles
+    /// </summary>
+    /// <param name="filterResource">Filter to be applied</param>
+    /// <returns>A list of vehicles</returns>
+    /// <response code="200">Returns a list or a empty list of vehicles</response>
     [HttpGet]
+    [ProducesResponseType(typeof(QueryResultResource<VehicleResource>), 200)]
     public async Task<QueryResultResource<VehicleResource>> GetVehicles(VehicleQueryResource filterResource)
     {
       var filter = _mapper.Map<VehicleQueryResource, VehicleQuery>(filterResource);

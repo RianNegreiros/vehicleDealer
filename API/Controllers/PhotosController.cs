@@ -29,7 +29,14 @@ namespace vehicleDealer.Controllers
       _host = host;
     }
 
+    /// <summary>
+    /// Get all photos from a specific vehicle
+    /// </summary>
+    /// <param name="vehicleId">Vehicle Identifier</param>
+    /// <returns>A list of photos</returns>
+    /// <response code="200">Returns a list or a empty list of photos</response>
     [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<PhotoResource>), 200)]
     public async Task<IEnumerable<PhotoResource>> GetPhotos(int vehicleId)
     {
       var photos = await _photoRepository.GetPhotos(vehicleId);
@@ -37,7 +44,17 @@ namespace vehicleDealer.Controllers
       return _mapper.Map<IEnumerable<Photo>, IEnumerable<PhotoResource>>(photos);
     }
 
+    /// <summary>
+    /// Upload a photo to a specific vehicle
+    /// </summary>
+    /// <param name="vehicleId">Vehicle Identifier</param>
+    /// <param name="file">Photo file</param>
+    /// <returns>A specific photo</returns>
+    /// <response code="200">Returns a specific photo</response>
+    /// <response code="404">If the vehicle is not found</response>
+    /// <response code="400">If the file is null, empty, exceeds the max file size or is not supported</response>
     [HttpPost]
+    [ProducesResponseType(typeof(PhotoResource), 200)]
     public async Task<IActionResult> Upload(int vehicleId, IFormFile file)
     {
       var vehicle = await _vehicleRepository.GetVehicle(vehicleId, includeRelated: false);

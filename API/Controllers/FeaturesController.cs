@@ -20,7 +20,13 @@ namespace vehicleDealer.Controllers
       _mapper = mapper;
     }
 
+    /// <summary>
+    /// Get all features
+    /// </summary>
+    /// <returns>A list of features</returns>
+    /// <response code="200">Returns a list or a empty list of features</response>
     [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<KeyValuePairResource>), 200)]
     public async Task<IEnumerable<KeyValuePairResource>> GetFeatures()
     {
       var features = await _context.Features.ToListAsync();

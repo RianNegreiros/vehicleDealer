@@ -19,7 +19,13 @@ namespace vehicleDealer.Controllers
       _context = context;
     }
 
+    /// <summary>
+    /// Get all makes
+    /// </summary>
+    /// <returns>A list of makes</returns>
+    /// <response code="200">Returns a list or a empty list of makes</response>
     [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<MakeResource>), 200)]
     public async Task<IEnumerable<MakeResource>> GetMakes()
     {
       var makes = await _context.Makes.Include(m => m.Models).ToListAsync();

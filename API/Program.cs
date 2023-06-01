@@ -1,5 +1,7 @@
+using System.Reflection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using vehicleDealer.Controllers;
 using vehicleDealer.Core;
 using vehicleDealer.Core.Interfaces;
@@ -13,7 +15,25 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+  c.SwaggerDoc("v1", new OpenApiInfo
+  {
+    Title = "Vehicle Dealer API",
+    Version = "v1",
+    Description = "API for Vehicle Dealer Application",
+    Contact = new OpenApiContact
+    {
+      Name = "Rian Negreiros Dos Santos",
+      Email = "riannegreiros@gmail.com",
+      Url = new Uri("https://github.com/RianNegreiros")
+    }
+  });
+
+  var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+  var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+  c.IncludeXmlComments(xmlPath);
+});
 
 builder.Services.Configure<PhotoSettings>(builder.Configuration.GetSection("PhotoSettings"));
 builder.Services.AddScoped<IVehicleRepository, VehicleRepository>();
@@ -46,10 +66,10 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+  app.UseSwagger();
+  app.UseSwaggerUI();
 }
 
-app.UseSwagger();
-app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 
